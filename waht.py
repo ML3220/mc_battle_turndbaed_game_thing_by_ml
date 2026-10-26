@@ -71,8 +71,19 @@ def red_calc(op_hp, op_hp_total):
         resault = 255
     return resault
 
+def reder_oponent(op_size, op_x, op_center, op_y, op_hb_x, op_hb_y, text_font):
+    screen.blit(immage_render("oponent_ml_.png", op_size, True), (op_x - op_center, op_y - op_center))
 
-
+    screen.blit(immage_render("health_bar.png", op_hb_size, True), (op_hb_x, op_hb_y))
+    
+    desplay_text("Ml322_", text_font, (0, 0, 0), op_hb_x + 72, op_hb_y + 160)
+def reder_player(text_font, op_size, op_hb_size):
+    screen.blit(immage_render("player.png", op_size*2, True), (138, 10))
+    screen.blit(immage_render("health_bar.png", op_hb_size, True), (20, 188))
+    desplay_text("you", text_font, (0, 0, 0), 20 + 72, 188 + 160)
+    #health
+    
+    pygame.draw.rect(screen, (red_calc(hp, hp_total), green_calc(hp, hp_total), 0), ((20 + 67) + hp_total*2.76 - hp*2.76, 188 + 190, hp*2.76, 20))
 
 #set the oponents's vars
 op_spirte_size = 200
@@ -112,24 +123,18 @@ while runing:
     #if enter (return) is prest tell the curent position of the mouse witch is curently the placeholder guy
     if key[pygame.K_RETURN]:
         op_hp -= 1
+        print(mouse_x, mouse_y)
     # chaing the backround color to any RGB value
     #olso a way to clear the screen
     screen.fill((0, 128, 0))
 
     #draw player
-    screen.blit(immage_render("player.png", op_size*2, True), (138, 10))
-    screen.blit(immage_render("health_bar.png", op_hb_size, True), (20, 188))
-    desplay_text("you", text_font, (0, 0, 0), 20 + 72, 188 + 160)
-    #health
-    
-    pygame.draw.rect(screen, (red_calc(hp, hp_total), green_calc(hp, hp_total), 0), ((20 + 67) + hp_total*2.76 - hp*2.76, 188 + 190, hp*2.76, 20))
+    reder_player(text_font, op_size, op_hb_size)
     #draw oponent
-    screen.blit(immage_render("oponent_ml_.png", op_size, True), (op_x - op_center, op_y - op_center))
+    reder_oponent(op_size, op_x, op_center, op_y, op_hb_x, op_hb_y, text_font)
 
-    screen.blit(immage_render("health_bar.png", op_hb_size, True), (op_hb_x, op_hb_y))
-    
-    desplay_text("Ml322_", text_font, (0, 0, 0), op_hb_x + 72, op_hb_y + 160)
-    screen.blit(immage_render("attack_button.png", 150, True), (mouse_x, mouse_y))
+
+    screen.blit(immage_render("attack_button.png", 150, True), (848, 520))
     #op health
     pygame.draw.rect(screen, (red_calc(op_hp, op_hp_total), green_calc(op_hp, op_hp_total), 0), ((op_hb_x + 67) + op_hp_total*2.76 - op_hp*2.76, op_hb_y + 190, op_hp*2.76, 20))
     # Update the actual display
