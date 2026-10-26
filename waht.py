@@ -77,6 +77,10 @@ def reder_oponent(op_size, op_x, op_center, op_y, op_hb_x, op_hb_y, text_font):
     screen.blit(immage_render("health_bar.png", op_hb_size, True), (op_hb_x, op_hb_y))
     
     desplay_text("Ml322_", text_font, (0, 0, 0), op_hb_x + 72, op_hb_y + 160)
+
+    #op health
+    pygame.draw.rect(screen, (red_calc(op_hp, op_hp_total), green_calc(op_hp, op_hp_total), 0), ((op_hb_x + 67) + op_hp_total*2.76 - op_hp*2.76, op_hb_y + 190, op_hp*2.76, 20))
+
 def reder_player(text_font, op_size, op_hb_size):
     screen.blit(immage_render("player.png", op_size*2, True), (138, 10))
     screen.blit(immage_render("health_bar.png", op_hb_size, True), (20, 188))
@@ -132,11 +136,16 @@ while runing:
     reder_player(text_font, op_size, op_hb_size)
     #draw oponent
     reder_oponent(op_size, op_x, op_center, op_y, op_hb_x, op_hb_y, text_font)
-
-
+    #just a test
+    pygame.draw.rect(screen, (255, 0, 0), (848, 520, 1084-848, 639-520))
+    
+    if (848 <= mouse_x <= 1084) and (520 <= mouse_y <= 639):
+        print("detected")
     screen.blit(immage_render("attack_button.png", 150, True), (848, 520))
-    #op health
-    pygame.draw.rect(screen, (red_calc(op_hp, op_hp_total), green_calc(op_hp, op_hp_total), 0), ((op_hb_x + 67) + op_hp_total*2.76 - op_hp*2.76, op_hb_y + 190, op_hp*2.76, 20))
+ 
+    
+    
+
     # Update the actual display
     pygame.display.flip()
 
