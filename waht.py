@@ -138,9 +138,14 @@ while runing:
     reder_oponent(op_size, op_x, op_center, op_y, op_hb_x, op_hb_y, text_font)
     #just a test
     pygame.draw.rect(screen, (255, 0, 0), (848, 520, 1084-848, 639-520))
+
     
-    if (848 <= mouse_x <= 1084) and (520 <= mouse_y <= 639):
-        print("detected")
+    if ((848 <= mouse_x <= 1084) and (520 <= mouse_y <= 639)) and pygame.mouse.get_just_pressed()[0]:
+        op_hp -= 10
+        hp -= 10
+        
+
+
     screen.blit(immage_render("attack_button.png", 150, True), (848, 520))
  
     
